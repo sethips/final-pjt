@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-center">{{ person.username }}님의 프로필</h1>
+
+{% include 'accounts/_follow.html' %}
+
+<hr>
+
+<h2>{{ person.username }}가 쓴 글</h2>
+{% for review in person.review_set.all %}
+  <div>{{ review.title }}</div>
+{% endfor %}
+
+<hr>
+
+<h2>{{ person.username }}가 쓴 댓글</h2>
+{% for comment in person.comment_set.all %}
+  <div>{{ comment.content }}</div>
+{% endfor %}
+ 
+<hr>
+
+<h2>{{ person.username }}가 좋아요한 글</h2>
+{% for review in person.like_reviews.all %}
+  <div>{{ review.title }}</div>
+{% endfor %}
+
+<hr>
+{% for log in logHistory %}
+{% if log.is_public %}
+  <p>{{ log.user }}님이 
+  {% if log.following %}
+  <span>{{ log.following.username }}님을 팔로우 했습니다.</span>
+  {% elif log.movie %}
+  <span>{{ log.movie.title }}을(를) 찜했습니다.</span>
+  {% elif log.rating %}
+  <span>{{ log.rating.movie.title }}에 별점 {{ log.rating.rank }}점을 매겼습니다.</span>
+  {% elif log.review %}
+    {% if log.action_type == 30 %}
+      <span>영화 [{{ log.review.movie.title }}]에 대해 [{{ log.review.title }}] 리뷰를 남겼습니다.</span>
+    {% else %}
+      <span>영화 [{{ log.review.movie.title }}]에 대한 리뷰 [{{ log.review.title }}]을(를) 좋아했습니다.</span>
+    {% endif %}
+  {% elif log.comment %}
+  <span>{{ log.comment.review.title }}에 댓글을 남겼습니다.</span>
+  {% endif %}
+  </p>
+{% endif %}
+{% endfor %}
+<hr>
+
+<a href="{% url 'community:index' %}">[back]</a>
+{% endblock  %}
