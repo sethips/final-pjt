@@ -3,10 +3,6 @@
 
 
 
-## 싸피 5기 1학기 파이썬트랙 최종 프로젝트로 제출한 내용은 [de4a1ece](https://lab.ssafy.com/tyl1996/final-pjt/tree/de4a1ece06e0144b19eeabab429c607a6cdefbd6)커밋에서 확인할 수 있습니다.
-
-## 싸피 제출 이후 변경사항
-
 ### 요구사항
 
 ![image-20210610230149385](README.assets/image-20210610230149385.png)
